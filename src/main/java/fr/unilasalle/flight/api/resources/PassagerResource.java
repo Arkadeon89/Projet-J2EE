@@ -91,6 +91,12 @@ public class PassagerResource extends GenericResource {
             passager.setFirstname(firstname);
         }
         if (StringUtils.isNotBlank(email_address)) {
+            Passager tmpPassager = repository.find("email_address", email_address).firstResult();
+            if (tmpPassager != null) {
+                return Response.status(400)
+                .entity(new ErrorWrapper("Un client possède déjà cette adresse email."))
+                .build();
+            }
             passager.setEmail_address(email_address);
         }
         try {
