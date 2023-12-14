@@ -54,13 +54,21 @@ public class AvionResource extends GenericResource {
                     .build();
         }
 
-        try {
-            repository.persistAndFlush(plane);
-            return Response.status(201).build();
-        } catch (PersistenceException e) {
-            return Response.serverError()
-                    .entity(new ErrorWrapper(e.getMessage()))
-                    .build();
+        Avion tmpAvion = repository.find("immatriculation", plane.getImmatriculation()).firstResult();
+
+        if (tmpAvion == null) {
+            try {
+                repository.persistAndFlush(plane);
+                return Response.status(201).build();
+            } catch (PersistenceException e) {
+                return Response.serverError()
+                        .entity(new ErrorWrapper(e.getMessage()))
+                        .build();
+            }
+        } else {
+            return Response.status(400)
+                .entity(new ErrorWrapper("Un avion possède déjà cette immatriculation."))
+                .build();
         }
 
     }

@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,23 +40,23 @@ public class Vol extends PanacheEntityBase {
     @Column(nullable = false)
     private String destination;
 
-    @NotBlank(message = "Departure date cannot be null")
+    @NotNull
     @Column(nullable = false)
     private LocalDate departure_date;
 
-    @NotBlank(message = "Departure time cannot be null")
+    @NotNull
     @Column(nullable = false)
     private LocalTime departure_time;
 
-    @NotBlank(message = "Arrival date cannot be null")
+    @NotNull
     @Column(nullable = false)
     private LocalDate arrival_date;
 
-    @NotBlank(message = "Arrival time cannot be null")
+    @NotNull
     @Column(nullable = false)
     private LocalTime arrival_time;
 
-    @NotBlank(message = "Plane ID cannot be null")
+    @NotNull
     @Column(nullable = false)
     private Long plane_id;
 }
