@@ -29,7 +29,7 @@ public class Vol extends PanacheEntityBase {
     private Long id;
 
     @NotBlank(message = "Number cannot be null")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String number;
 
     @NotBlank(message = "Origin cannot be null")

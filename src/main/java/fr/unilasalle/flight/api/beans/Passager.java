@@ -34,6 +34,6 @@ public class Passager extends PanacheEntityBase {
     private String firstname;
 
     @NotBlank(message = "Email address cannot be null")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email_address;
 }

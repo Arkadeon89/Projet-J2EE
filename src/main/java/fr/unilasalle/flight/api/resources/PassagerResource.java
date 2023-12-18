@@ -98,7 +98,16 @@ public class PassagerResource extends GenericResource {
                 .build();
             }
             passager.setEmail_address(email_address);
+            
         }
+
+        var violations = validator.validate(passager);
+        if (!violations.isEmpty()) {
+            return Response.status(400)
+                .entity(new ErrorWrapper(violations))
+                .build();
+        }
+
         try {
             repository.persistAndFlush(passager);
             return Response.status(200).build();
